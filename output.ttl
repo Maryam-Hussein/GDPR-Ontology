@@ -1,0 +1,38 @@
+@prefix ex: <http://www.semanticweb.org/gdpr/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# -- Activities --
+ex:ACT01 a ex:DataProcessingActivity ; ex:activityName "User_Registration" ; ex:isGovernedBy ex:Article_6 ; ex:processes ex:ContactData ; ex:requiresBasis ex:Contract .
+ex:ACT02 a ex:DataProcessingActivity ; ex:activityName "Blood_Test_Analysis" ; ex:isGovernedBy ex:Article_9 ; ex:processes ex:HealthData ; ex:requiresBasis ex:Explicit_Consent .
+ex:ACT03 a ex:DataProcessingActivity ; ex:activityName "Employee_Payroll" ; ex:isGovernedBy ex:Article_6 ; ex:processes ex:FinancialData ; ex:requiresBasis ex:Legal_Obligation .
+ex:ACT04 a ex:DataProcessingActivity ; ex:activityName "Targeted_Ads" ; ex:isGovernedBy ex:Article_6 ; ex:processes ex:BehavioralData ; ex:requiresBasis ex:Consent .
+ex:ACT05 a ex:DataProcessingActivity ; ex:activityName "Fingerprint_Login" ; ex:isGovernedBy ex:Article_9 ; ex:processes ex:BiometricData ; ex:requiresBasis ex:Explicit_Consent .
+ex:ACT06 a ex:DataProcessingActivity ; ex:activityName "GPS_Navigation" ; ex:isGovernedBy ex:Article_6 ; ex:processes ex:LocationData ; ex:requiresBasis ex:Vital_Interest .
+ex:ACT07 a ex:DataProcessingActivity ; ex:activityName "Customer_Support" ; ex:isGovernedBy ex:Article_6 ; ex:processes ex:IdentificationData ; ex:requiresBasis ex:Legitimate_Interest .
+ex:ACT08 a ex:DataProcessingActivity ; ex:activityName "Genetic_Research" ; ex:isGovernedBy ex:Article_9 ; ex:processes ex:HealthData ; ex:requiresBasis ex:Explicit_Consent .
+ex:ACT09 a ex:DataProcessingActivity ; ex:activityName "Credit_Scoring" ; ex:isGovernedBy ex:Article_6 ; ex:processes ex:FinancialData ; ex:requiresBasis ex:Contract .
+ex:ACT10 a ex:DataProcessingActivity ; ex:activityName "CCTV_Security" ; ex:isGovernedBy ex:Article_32 ; ex:processes ex:BiometricData ; ex:requiresBasis ex:Public_Task .
+ex:ACT11 a ex:DataProcessingActivity ; ex:activityName "Newsletter_Sync" ; ex:isGovernedBy ex:Article_6 ; ex:processes ex:ContactData ; ex:requiresBasis ex:Consent .
+ex:ACT12 a ex:DataProcessingActivity ; ex:activityName "Insurance_Claim" ; ex:isGovernedBy ex:Article_9 ; ex:processes ex:HealthData ; ex:requiresBasis ex:Contract .
+ex:ACT13 a ex:DataProcessingActivity ; ex:activityName "App_Usage_Log" ; ex:isGovernedBy ex:Article_6 ; ex:processes ex:BehavioralData ; ex:requiresBasis ex:Legitimate_Interest .
+ex:ACT14 a ex:DataProcessingActivity ; ex:activityName "Office_Entry_Badge" ; ex:isGovernedBy ex:Article_6 ; ex:processes ex:IdentificationData ; ex:requiresBasis ex:Contract .
+ex:ACT15 a ex:DataProcessingActivity ; ex:activityName "Fraud_Detection" ; ex:isGovernedBy ex:Article_6 ; ex:processes ex:FinancialData ; ex:requiresBasis ex:Legal_Obligation .
+ex:ACT16 a ex:DataProcessingActivity ; ex:activityName "COVID_Tracing" ; ex:isGovernedBy ex:Article_9 ; ex:processes ex:HealthData ; ex:requiresBasis ex:Public_Interest .
+ex:ACT17 a ex:DataProcessingActivity ; ex:activityName "Online_Order_Form" ; ex:isGovernedBy ex:Article_6 ; ex:processes ex:ContactData ; ex:requiresBasis ex:Contract .
+ex:ACT18 a ex:DataProcessingActivity ; ex:activityName "Facial_Recognition" ; ex:isGovernedBy ex:Article_9 ; ex:processes ex:BiometricData ; ex:requiresBasis ex:Explicit_Consent .
+ex:ACT19 a ex:DataProcessingActivity ; ex:activityName "Tax_Reporting" ; ex:isGovernedBy ex:Article_6 ; ex:processes ex:FinancialData ; ex:requiresBasis ex:Legal_Obligation .
+ex:ACT20 a ex:DataProcessingActivity ; ex:activityName "Delivery_Tracking" ; ex:isGovernedBy ex:Article_6 ; ex:processes ex:LocationData ; ex:requiresBasis ex:Contract .
+
+# -- Data Categories --
+ex:ContactData a ex:PersonalDataCategory ; ex:isSensitive "false"^^xsd:boolean .
+ex:HealthData a ex:PersonalDataCategory ; ex:isSensitive "true"^^xsd:boolean .
+ex:FinancialData a ex:PersonalDataCategory ; ex:isSensitive "false"^^xsd:boolean .
+ex:BehavioralData a ex:PersonalDataCategory ; ex:isSensitive "false"^^xsd:boolean .
+ex:BiometricData a ex:PersonalDataCategory ; ex:isSensitive "true"^^xsd:boolean .
+ex:LocationData a ex:PersonalDataCategory ; ex:isSensitive "false"^^xsd:boolean .
+ex:IdentificationData a ex:PersonalDataCategory ; ex:isSensitive "false"^^xsd:boolean .
+
+# -- Security Measures --
+ex:Encryption a ex:SecurityMeasure ; ex:measureName "Encryption" .
+ex:Access_Control a ex:SecurityMeasure ; ex:measureName "Access_Control" .
+ex:Data_Masking a ex:SecurityMeasure ; ex:measureName "Data_Masking" .

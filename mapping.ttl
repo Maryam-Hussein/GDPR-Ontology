@@ -1,0 +1,61 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://www.semanticweb.org/gdpr/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@base <http://example.com/base/> .
+
+<ActivityMapping>
+    rml:logicalSource [
+        rml:source "instances.csv" ;
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://www.semanticweb.org/gdpr/ontology#{activityID}" ;
+        rr:class ex:DataProcessingActivity
+    ];
+    rr:predicateObjectMap [
+        rr:predicate ex:activityName ;
+        rr:objectMap [ rml:reference "activityName" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate ex:isGovernedBy ;
+        rr:objectMap [ rr:template "http://www.semanticweb.org/gdpr/ontology#{articleNumber}" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate ex:processes ;
+        rr:objectMap [ rr:template "http://www.semanticweb.org/gdpr/ontology#{categoryName}" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate ex:requiresBasis ;
+        rr:objectMap [ rr:template "http://www.semanticweb.org/gdpr/ontology#{legalBasisName}" ]
+    ] .
+
+<CategoryMapping>
+    rml:logicalSource [
+        rml:source "instances.csv" ;
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://www.semanticweb.org/gdpr/ontology#{categoryName}" ;
+        rr:class ex:PersonalDataCategory
+    ];
+    rr:predicateObjectMap [
+        rr:predicate ex:isSensitive ;
+        rr:objectMap [ rml:reference "isSensitive" ; rr:datatype xsd:boolean ]
+    ] .
+
+<MeasureMapping>
+    rml:logicalSource [
+        rml:source "instances.csv" ;
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://www.semanticweb.org/gdpr/ontology#{securityMeasureName}" ;
+        rr:class ex:SecurityMeasure
+    ];
+    rr:predicateObjectMap [
+        rr:predicate ex:measureName ;
+        rr:objectMap [ rml:reference "securityMeasureName" ]
+    ] .

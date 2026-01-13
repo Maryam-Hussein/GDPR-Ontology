@@ -1,0 +1,538 @@
+@prefix : <http://www.semanticweb.org/gdpr/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/gdpr/ontology#> .
+
+<http://www.semanticweb.org/gdpr/ontology> rdf:type owl:Ontology ;
+                                            rdfs:comment "An ontology for modeling GDPR compliance requirements, data processing activities, and security measures."@en ,
+                                                         "Name: Maryam Abd El Moneim Mohamed Hussein   	ID: 1404-3-262"@en ;
+                                            rdfs:label "GDPR Compliance Ontology"@en .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/gdpr/ontology#appliesToDataCategory
+:appliesToDataCategory rdf:type owl:ObjectProperty ;
+                       rdfs:domain :GDPR_Article ;
+                       rdfs:range :PersonalDataCategory ;
+                       rdfs:comment "Indicates which data categories a GDPR article applies to."@en ;
+                       rdfs:label "applies to data category"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#hasController
+:hasController rdf:type owl:ObjectProperty ;
+               rdfs:domain :DataProcessingActivity ;
+               rdfs:range :DataController ;
+               rdfs:comment "Links a processing activity to its data controller."@en ;
+               rdfs:label "has controller"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#hasProcessor
+:hasProcessor rdf:type owl:ObjectProperty ;
+              rdfs:domain :DataProcessingActivity ;
+              rdfs:range :DataProcessor ;
+              rdfs:comment "Links a processing activity to its data processor."@en ;
+              rdfs:label "has processor"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#hasSubArticle
+:hasSubArticle rdf:type owl:ObjectProperty ,
+                        owl:TransitiveProperty ;
+               rdfs:domain :GDPR_Article ;
+               rdfs:range :GDPR_Article ;
+               rdfs:comment "Links a GDPR article to its sub-articles or clauses."@en ;
+               rdfs:label "has sub-article"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#implementsMeasure
+:implementsMeasure rdf:type owl:ObjectProperty ;
+                   rdfs:domain :DataController ;
+                   rdfs:range :SecurityMeasure ;
+                   rdfs:comment "Indicates security measures implemented by a data controller."@en ;
+                   rdfs:label "implements measure"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#involvesDataSubject
+:involvesDataSubject rdf:type owl:ObjectProperty ;
+                     rdfs:domain :DataProcessingActivity ;
+                     rdfs:range :DataSubject ;
+                     rdfs:comment "Links a processing activity to the data subject whose data is being processed."@en ;
+                     rdfs:label "involves data subject"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#isGovernedBy
+:isGovernedBy rdf:type owl:ObjectProperty ;
+              rdfs:domain :DataProcessingActivity ;
+              rdfs:range :GDPR_Article ;
+              rdfs:comment "Links a data processing activity to the GDPR article that governs it."@en ;
+              rdfs:label "is governed by"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#mandatesMeasure
+:mandatesMeasure rdf:type owl:ObjectProperty ;
+                 rdfs:domain :GDPR_Article ;
+                 rdfs:range :SecurityMeasure ;
+                 rdfs:comment "Indicates which security measures are mandated by a GDPR article."@en ;
+                 rdfs:label "mandates measure"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#processes
+:processes rdf:type owl:ObjectProperty ;
+           rdfs:domain :DataProcessingActivity ;
+           rdfs:range :PersonalDataCategory ;
+           rdfs:comment "Indicates which category of personal data is processed by an activity."@en ;
+           rdfs:label "processes"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#relatedToArticle
+:relatedToArticle rdf:type owl:ObjectProperty ,
+                           owl:SymmetricProperty ;
+                  rdfs:domain :GDPR_Article ;
+                  rdfs:range :GDPR_Article ;
+                  rdfs:comment "Links related GDPR articles."@en ;
+                  rdfs:label "related to article"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#requiresBasis
+:requiresBasis rdf:type owl:ObjectProperty ;
+               rdfs:domain :DataProcessingActivity ;
+               rdfs:range :LegalBasis ;
+               rdfs:comment "Specifies the legal basis required for a data processing activity."@en ;
+               rdfs:label "requires basis"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#requiresMeasure
+:requiresMeasure rdf:type owl:ObjectProperty ;
+                 rdfs:domain :DataProcessingActivity ;
+                 rdfs:range :SecurityMeasure ;
+                 rdfs:comment "Links a processing activity to required security measures."@en ;
+                 rdfs:label "requires measure"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/gdpr/ontology#activityDescription
+:activityDescription rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :DataProcessingActivity ;
+                     rdfs:range xsd:string ;
+                     rdfs:comment "Description of what the processing activity does."@en ;
+                     rdfs:label "activity description"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#activityName
+:activityName rdf:type owl:DatatypeProperty ;
+              rdfs:domain :DataProcessingActivity ;
+              rdfs:range xsd:string ;
+              rdfs:comment "The name of the data processing activity."@en ;
+              rdfs:label "activity name"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#activityPurpose
+:activityPurpose rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :DataProcessingActivity ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "The purpose for which data is being processed."@en ;
+                 rdfs:label "activity purpose"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#articleNumber
+:articleNumber rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain :GDPR_Article ;
+               rdfs:range xsd:string ;
+               rdfs:comment "The official article number in GDPR."@en ;
+               rdfs:label "article number"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#articleText
+:articleText rdf:type owl:DatatypeProperty ;
+             rdfs:domain :GDPR_Article ;
+             rdfs:range xsd:string ;
+             rdfs:comment "The full text content of the GDPR article."@en ;
+             rdfs:label "article text"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#articleTitle
+:articleTitle rdf:type owl:DatatypeProperty ;
+              rdfs:domain :GDPR_Article ;
+              rdfs:range xsd:string ;
+              rdfs:comment "The title of the GDPR article."@en ;
+              rdfs:label "article title"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#basisDescription
+:basisDescription rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :LegalBasis ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "Description of the legal basis for processing."@en ;
+                  rdfs:label "basis description"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#basisName
+:basisName rdf:type owl:DatatypeProperty ;
+           rdfs:domain :LegalBasis ;
+           rdfs:range xsd:string ;
+           rdfs:comment "The name of the legal basis."@en ;
+           rdfs:label "basis name"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#categoryName
+:categoryName rdf:type owl:DatatypeProperty ;
+              rdfs:domain :PersonalDataCategory ;
+              rdfs:range xsd:string ;
+              rdfs:comment "The name of the personal data category."@en ;
+              rdfs:label "category name"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#consentDate
+:consentDate rdf:type owl:DatatypeProperty ;
+             rdfs:domain :DataSubject ;
+             rdfs:range xsd:date ;
+             rdfs:comment "The date when consent was given."@en ;
+             rdfs:label "consent date"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#consentGiven
+:consentGiven rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :DataSubject ;
+              rdfs:range xsd:boolean ;
+              rdfs:comment "Indicates whether the data subject has given consent."@en ;
+              rdfs:label "consent given"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#contractDate
+:contractDate rdf:type owl:DatatypeProperty ;
+              rdfs:domain :DataProcessor ;
+              rdfs:range xsd:date ;
+              rdfs:comment "The date when the processing contract was signed."@en ;
+              rdfs:label "contract date"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#dataExamples
+:dataExamples rdf:type owl:DatatypeProperty ;
+              rdfs:domain :PersonalDataCategory ;
+              rdfs:range xsd:string ;
+              rdfs:comment "Examples of data that fall under this category."@en ;
+              rdfs:label "data examples"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#dpoEmail
+:dpoEmail rdf:type owl:DatatypeProperty ;
+          rdfs:domain :DataController ;
+          rdfs:range xsd:string ;
+          rdfs:comment "Email address of the Data Protection Officer."@en ;
+          rdfs:label "DPO email"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#isAutomated
+:isAutomated rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :DataProcessingActivity ;
+             rdfs:range xsd:boolean ;
+             rdfs:comment "Indicates whether the processing activity is automated."@en ;
+             rdfs:label "is automated"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#isImplemented
+:isImplemented rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain :SecurityMeasure ;
+               rdfs:range xsd:boolean ;
+               rdfs:comment "Indicates whether this security measure has been implemented."@en ;
+               rdfs:label "is implemented"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#isSensitive
+:isSensitive rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :PersonalDataCategory ;
+             rdfs:range xsd:boolean ;
+             rdfs:comment "Indicates whether this data category is considered sensitive under GDPR Article 9."@en ;
+             rdfs:label "is sensitive"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#measureDescription
+:measureDescription rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :SecurityMeasure ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "Description of the security measure."@en ;
+                    rdfs:label "measure description"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#measureName
+:measureName rdf:type owl:DatatypeProperty ;
+             rdfs:domain :SecurityMeasure ;
+             rdfs:range xsd:string ;
+             rdfs:comment "The name of the security measure."@en ;
+             rdfs:label "measure name"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#measureType
+:measureType rdf:type owl:DatatypeProperty ;
+             rdfs:domain :SecurityMeasure ;
+             rdfs:range xsd:string ;
+             rdfs:comment "The type of security measure (e.g., Technical, Organizational)."@en ;
+             rdfs:label "measure type"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#organizationName
+:organizationName rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :DataController ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "The name of the organization acting as data controller."@en ;
+                  rdfs:label "organization name"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#processorName
+:processorName rdf:type owl:DatatypeProperty ;
+               rdfs:domain :DataProcessor ;
+               rdfs:range xsd:string ;
+               rdfs:comment "The name of the data processor."@en ;
+               rdfs:label "processor name"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#registrationNumber
+:registrationNumber rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :DataController ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "Official registration or identification number."@en ;
+                    rdfs:label "registration number"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#requiresConsent
+:requiresConsent rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain :LegalBasis ;
+                 rdfs:range xsd:boolean ;
+                 rdfs:comment "Indicates whether this legal basis requires explicit consent."@en ;
+                 rdfs:label "requires consent"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#retentionPeriod
+:retentionPeriod rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :DataProcessingActivity ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "How long the data is retained during this activity."@en ;
+                 rdfs:label "retention period"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/gdpr/ontology#BehavioralData
+:BehavioralData rdf:type owl:Class ;
+                rdfs:subClassOf :PersonalDataCategory ;
+                owl:disjointWith :BiometricData ,
+                                 :ContactData ,
+                                 :FinancialData ,
+                                 :HealthData ,
+                                 :IdentificationData ,
+                                 :LocationData ;
+                rdfs:comment "Information about online behavior and preferences."@en ;
+                rdfs:label "Behavioral Data"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#BiometricData
+:BiometricData rdf:type owl:Class ;
+               rdfs:subClassOf :PersonalDataCategory ;
+               owl:disjointWith :ContactData ,
+                                :FinancialData ,
+                                :HealthData ,
+                                :IdentificationData ,
+                                :LocationData ;
+               rdfs:comment "Physical characteristics (fingerprints, facial recognition, DNA)."@en ;
+               rdfs:label "Biometric Data"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#ContactData
+:ContactData rdf:type owl:Class ;
+             rdfs:subClassOf :PersonalDataCategory ;
+             owl:disjointWith :FinancialData ,
+                              :HealthData ,
+                              :IdentificationData ,
+                              :LocationData ;
+             rdfs:comment "Data used for communication (email, phone, address)."@en ;
+             rdfs:label "Contact Data"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#DataAnalysis
+:DataAnalysis rdf:type owl:Class ;
+              rdfs:subClassOf :DataProcessingActivity ;
+              rdfs:comment "Activity of analyzing personal data."@en ;
+              rdfs:label "Data Analysis"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#DataCollection
+:DataCollection rdf:type owl:Class ;
+                rdfs:subClassOf :DataProcessingActivity ;
+                rdfs:comment "Activity of gathering personal data."@en ;
+                rdfs:label "Data Collection"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#DataController
+:DataController rdf:type owl:Class ;
+                rdfs:subClassOf foaf:Organization ;
+                owl:disjointWith :DataProcessor ;
+                rdfs:comment "Natural or legal person that determines the purposes and means of processing personal data."@en ;
+                rdfs:label "Data Controller"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#DataDeletion
+:DataDeletion rdf:type owl:Class ;
+              rdfs:subClassOf :DataProcessingActivity ;
+              rdfs:comment "Activity of deleting or erasing personal data."@en ;
+              rdfs:label "Data Deletion"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#DataProcessingActivity
+:DataProcessingActivity rdf:type owl:Class ;
+                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                          owl:onProperty :isGovernedBy ;
+                                          owl:minCardinality "1"^^xsd:nonNegativeInteger
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :processes ;
+                                          owl:minCardinality "1"^^xsd:nonNegativeInteger
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :hasController ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass :DataController
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :requiresBasis ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass :LegalBasis
+                                        ] ;
+                        rdfs:comment "Processing activities that handle sensitive data categories must have appropriate legal basis such as explicit consent."@en ,
+                                     "Represents any operation or set of operations performed on personal data."@en ;
+                        rdfs:label "Data Processing Activity"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#DataProcessor
+:DataProcessor rdf:type owl:Class ;
+               rdfs:subClassOf foaf:Organization ;
+               rdfs:comment "Natural or legal person that processes personal data on behalf of the controller."@en ;
+               rdfs:label "Data Processor"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#DataStorage
+:DataStorage rdf:type owl:Class ;
+             rdfs:subClassOf :DataProcessingActivity ;
+             rdfs:comment "Activity of storing personal data."@en ;
+             rdfs:label "Data Storage"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#DataSubject
+:DataSubject rdf:type owl:Class ;
+             rdfs:subClassOf foaf:Person ;
+             rdfs:comment "An identified or identifiable natural person whose personal data is being processed."@en ;
+             rdfs:label "Data Subject"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#DataTransfer
+:DataTransfer rdf:type owl:Class ;
+              rdfs:subClassOf :DataProcessingActivity ;
+              rdfs:comment "Activity of transferring personal data to third parties or across borders."@en ;
+              rdfs:label "Data Transfer"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#FinancialData
+:FinancialData rdf:type owl:Class ;
+               rdfs:subClassOf :PersonalDataCategory ;
+               owl:disjointWith :HealthData ,
+                                :IdentificationData ,
+                                :LocationData ;
+               rdfs:comment "Financial information (bank accounts, credit cards, transactions)."@en ;
+               rdfs:label "Financial Data"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#GDPR_Article
+:GDPR_Article rdf:type owl:Class ;
+              rdfs:comment "Represents a specific article or provision from the GDPR regulation."@en ;
+              rdfs:label "GDPR Article"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#HealthData
+:HealthData rdf:type owl:Class ;
+            rdfs:subClassOf :PersonalDataCategory ;
+            owl:disjointWith :IdentificationData ,
+                             :LocationData ;
+            rdfs:comment "Information about physical or mental health."@en ;
+            rdfs:label "Health Data"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#IdentificationData
+:IdentificationData rdf:type owl:Class ;
+                    rdfs:subClassOf :PersonalDataCategory ;
+                    owl:disjointWith :LocationData ;
+                    rdfs:comment "Data used to identify a person (name, ID number, etc.)."@en ;
+                    rdfs:label "Identification Data"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#LegalBasis
+:LegalBasis rdf:type owl:Class ;
+            rdfs:comment "Represents the legal justification for processing personal data under GDPR."@en ;
+            rdfs:label "Legal Basis"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#LocationData
+:LocationData rdf:type owl:Class ;
+              rdfs:subClassOf :PersonalDataCategory ;
+              rdfs:comment "Geographic location information."@en ;
+              rdfs:label "Location Data"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#OrganizationalMeasure
+:OrganizationalMeasure rdf:type owl:Class ;
+                       rdfs:subClassOf :SecurityMeasure ;
+                       owl:disjointWith :TechnicalMeasure ;
+                       rdfs:comment "Organizational security measures (policies, training, audits)."@en ;
+                       rdfs:label "Organizational Measure"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#PersonalDataCategory
+:PersonalDataCategory rdf:type owl:Class ;
+                      rdfs:comment "Represents a category or type of personal data as defined by GDPR."@en ;
+                      rdfs:label "Personal Data Category"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#SecurityMeasure
+:SecurityMeasure rdf:type owl:Class ;
+                 rdfs:comment "Represents technical and organizational measures to ensure data security."@en ;
+                 rdfs:label "Security Measure"@en .
+
+
+###  http://www.semanticweb.org/gdpr/ontology#TechnicalMeasure
+:TechnicalMeasure rdf:type owl:Class ;
+                  rdfs:subClassOf :SecurityMeasure ;
+                  rdfs:comment "Technical security measures (encryption, access control, etc.)."@en ;
+                  rdfs:label "Technical Measure"@en .
+
+
+###  http://xmlns.com/foaf/0.1/Organization
+foaf:Organization rdf:type owl:Class .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+foaf:Person rdf:type owl:Class .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
