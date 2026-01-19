@@ -2,6 +2,8 @@
 
 [![Ontology](https://img.shields.io/badge/Ontology-OWL%20%2F%20RDF-blue.svg)](https://www.w3.org/OWL/)
 [![RML](https://img.shields.io/badge/Data%20Mapping-RML-red.svg)](https://rml.io/)
+[![Vocab-FOAF](https://img.shields.io/badge/Vocabulary-FOAF-orange.svg)](http://xmlns.com/foaf/0.1/)
+[![Query-SPARQL](https://img.shields.io/badge/Query-SPARQL-lightblue.svg)](https://www.w3.org/TR/sparql11-query/)
 
 ## 📖 Project Overview
 The **GDPR-Ontology** project provides a formal, semantic representation of the **General Data Protection Regulation (GDPR)**. By translating complex legal texts into a machine-readable format, this framework enables automated compliance auditing, logical reasoning, and efficient management of data privacy.
