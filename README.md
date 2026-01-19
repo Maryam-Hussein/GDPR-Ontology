@@ -35,7 +35,7 @@ To transform the provided dummy data into a semantic Knowledge Graph, run the fo
 
 ```bash
 java -jar rmlmapper-8.0.0-r378-all.jar --mappingfile mapping.ttl --outputfile output.ttl
-
+```
 ## 🔍 SPARQL Compliance Queries
 
 The ontology supports complex querying to verify regulatory adherence.  
@@ -54,6 +54,7 @@ WHERE {
             :isGovernedBy :Article_6 ;
             :activityName ?Activity_Name .
 }
+```
 ### 2. Find Activities Requiring "Explicit Consent"
 
 Identifies processes involving sensitive data that strictly require explicit consent.
@@ -68,6 +69,7 @@ WHERE {
             :activityName ?Activity_Name ;
             :processes ?Category .
 }
+```
 ### 3. Identify Activities Based on Contract
 
 Lists activities justified by the fulfillment of a contract.
@@ -81,7 +83,7 @@ WHERE {
   ?activity :requiresBasis :Contract ;
             :activityName ?Activity_Name .
 }
-
+```
 ## ✅ Evaluation & Validation
 
 The ontology has been successfully validated using the **HermiT 1.4.3.456** reasoner in **Protégé**.  
